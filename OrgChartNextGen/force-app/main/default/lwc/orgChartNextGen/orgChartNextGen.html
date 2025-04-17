@@ -1,0 +1,110 @@
+<template>
+    <lightning-card title="Omer Ansari's OrgChart">
+        <div class="top-container slds-grid slds-gutters slds-p-around_small">
+            <!-- Left Column: Stats box (vertical) -->
+            <div class="stats-box slds-col">
+                <p><strong>Total Employees:</strong> {totalEmployees}</p>
+                <p><strong>Total Contractors:</strong> {totalContractors}</p>
+                <div class="hide-contractors-inline">
+                    <lightning-button 
+                        id="contractors-toggle-inline"
+                        name="contractorsToggleInline"
+                        label={contractorButtonLabel} 
+                        onclick={toggleContractors}
+                        class="slds-button_neutral">
+                    </lightning-button>
+                </div>
+                
+                <!-- Department color legend with interactive filtering -->
+                <div class="dept-legend">
+                    <p><strong>Department : </strong></p>
+                    <div class="legend-item" data-department="Viz" onclick={handleLegendClick}>
+                        <span class="legend-color dept-viz"></span>
+                        <span class="legend-label">Viz</span>
+                        <span if:true={isVizSelected} class="legend-active">✓</span>
+                    </div>
+                    <div class="legend-item" data-department="Indirect Labor" onclick={handleLegendClick}>
+                        <span class="legend-color dept-indirect"></span>
+                        <span class="legend-label">Indirect Labor</span>
+                        <span if:true={isIndirectSelected} class="legend-active">✓</span>
+                    </div>
+                    <div class="legend-item" data-department="EDH" onclick={handleLegendClick}>
+                        <span class="legend-color dept-edh"></span>
+                        <span class="legend-label">EDH</span>
+                        <span if:true={isEDHSelected} class="legend-active">✓</span>
+                    </div>
+                    <div class="legend-item" data-department="Data Cloud" onclick={handleLegendClick}>
+                        <span class="legend-color dept-datacloud"></span>
+                        <span class="legend-label">Data Cloud</span>
+                        <span if:true={isDataCloudSelected} class="legend-active">✓</span>
+                    </div>
+                    <div class="legend-item" data-department="Snowflake" onclick={handleLegendClick}>
+                        <span class="legend-color dept-snowflake"></span>
+                        <span class="legend-label">Snowflake</span>
+                        <span if:true={isSnowflakeSelected} class="legend-active">✓</span>
+                    </div>
+                    <div class="legend-item" data-department="" onclick={handleLegendClick}>
+                        <span class="legend-color dept-all"></span>
+                        <span class="legend-label">All Departments</span>
+                        <span if:false={selectedDepartment} class="legend-active">✓</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Middle Column: Trainings by Due Date (vertical) - now interactive -->
+            <div class="trainings-box slds-col">
+                <p><strong>Trainings : </strong></p>
+                <ul>
+                    <div class="legend-item" data-course="" onclick={handleTrainingClick}>
+                        <span class="legend-label">All Trainings</span>
+                        <span if:false={selectedCourse} class="legend-active">✓</span>
+                    </div>
+                    <template for:each={trainingDueStats} for:item="stat">
+                        <div class="legend-item" key={stat.dueDate} data-course={stat.courseName} onclick={handleTrainingClick}>
+                            <span class="legend-label">{stat.dueLabel}: {stat.count}</span>
+                            <span if:true={stat.selected} class="legend-active">✓</span>
+                        </div>
+                    </template>
+                </ul>
+            </div>
+            
+            <!-- Right Column: Empty space now that we removed the duplicate Hide Contractors button -->
+            <div class="filters slds-col">
+                <!-- Empty column -->
+            </div>
+        </div>
+
+        <!-- Main container: org chart on left, detail panel on right -->
+        <div class="org-layout-container slds-m-around_medium">
+            <div class="org-chart-section">
+                <template if:true={treeData}>
+                    <ul class="root-nodes">
+                        <template for:each={treeData} for:item="rootNode">
+                            <li key={rootNode.email} class="root-node-item">
+                                <c-org-node-next-gen 
+                                    tree-item={rootNode}
+                                    depth="1"
+                                    onemployeeclick={handleEmployeeClick}>
+                                </c-org-node-next-gen>
+                            </li>
+                        </template>
+                    </ul>
+                </template>
+                <template if:false={treeData}>
+                    <p>No data available.</p>
+                </template>
+            </div>
+            
+            <!-- Side panel detail -->
+            <div class="detail-panel-section">
+                <template if:true={selectedEmployee}>
+                    <c-employee-detail-next-gen employee={selectedEmployee}></c-employee-detail-next-gen>
+                </template>
+                <template if:false={selectedEmployee}>
+                    <div class="empty-detail-message">
+                        <p>Click on an employee to view details</p>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </lightning-card>
+</template>
