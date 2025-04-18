@@ -1,0 +1,64 @@
+<template>
+    <div class="employee-detail">
+        <img src={employee.profileImageLink} alt="Profile Image" class="profile-img"/>
+        <h3>{employee.fullName}</h3>
+        <p><strong>Title:</strong> {employee.title}</p>
+        <p><strong>Department:</strong> {employee.department}</p>
+        <p><strong>Email:</strong> {employee.email}</p>
+        
+        <!-- Only show direct reports information if the employee has direct reports -->
+        <template if:true={hasDirectReports}>
+            <p><strong>Direct Reports:</strong> {employee.directReportsCount}</p>
+            
+            <!-- NEW: Direct Reports Training Stats -->
+            <template if:true={employee.subordinates}>
+                <div class="direct-report-stats">
+                    <p>
+                        <strong>Direct Reports with Pending Training:</strong>
+                        {pendingTrainingStats.pendingEmployees.length}
+                    </p>
+                    <p>
+                        <strong>Total Trainings Pending Among Direct Reports:</strong>
+                        {pendingTrainingStats.totalTrainings}
+                    </p>
+                    <template if:true={pendingTrainingStats.pendingEmployees.length}>
+                        <ul>
+                            <template for:each={pendingTrainingStats.pendingEmployees} for:item="item">
+                                <li key={item.name}>
+                                    {item.name} - {item.count} pending
+                                </li>
+                            </template>
+                        </ul>
+                    </template>
+                </div>
+            </template>
+        </template>
+        
+        <div class="training-section">
+            <p class="section-heading"><strong>Pending Training Courses:</strong></p>
+            <template if:true={employee.hasPendingTraining}>
+                <template if:true={employee.parsedCourses.length}>
+                    <ul>
+                        <template for:each={employee.parsedCourses} for:item="course">
+                            <li key={course.courseName} class={course.cssClass}>
+                                <span class="course-text">{course.courseName} - {course.dueDate}</span>
+                                <span class="warning-icon"></span>
+                            </li>
+                        </template>
+                    </ul>
+                </template>
+                <template if:false={employee.parsedCourses.length}>
+                    <p class="no-training">None</p>
+                </template>
+            </template>
+            <template if:false={employee.hasPendingTraining}>
+                <p class="no-training">None</p>
+            </template>
+        </div>
+        
+        <div class="stats">
+            <p><strong>Git Commits:</strong> 0</p>
+            <p><strong>Tickets Solved:</strong> 0</p>
+        </div>
+    </div>
+</template>
