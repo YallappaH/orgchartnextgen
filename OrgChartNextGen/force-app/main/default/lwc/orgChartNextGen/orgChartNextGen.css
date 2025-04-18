@@ -1,0 +1,249 @@
+/* Add styling for root nodes */
+.root-nodes {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: relative;
+    justify-content: space-around;
+    width: 100%;
+    padding-top: 30px; /* Space for the horizontal line */
+}
+
+/* Simple vertical lines for root nodes */
+.root-node-item {
+    position: relative;
+}
+
+/* This creates the vertical line down from the top horizontal line to each direct report */
+.root-node-item::before {
+    content: '';
+    position: absolute;
+    top: -30px; /* Connect to the top horizontal line */
+    left: 50%;
+    width: 2px;
+    height: 30px;
+    background-color: #c9c9c9;
+    z-index: 2;
+}
+
+/* Top horizontal line spanning all top-level employees */
+.root-nodes::before {
+    content: '';
+    position: absolute;
+    top: 0px; /* Position it at the very top of the root-nodes container */
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #c9c9c9;
+    z-index: 3;
+}
+
+/* Inline Hide Contractors button */
+.hide-contractors-inline {
+    margin: 8px 0 12px 0;
+}
+
+/* Department color legend */
+.dept-legend {
+    margin-top: 16px;
+    padding-top: 10px;
+    border-top: 1px solid #d8dde6;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    padding: 6px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.legend-item:hover {
+    background-color: #f3f3f3;
+}
+
+.legend-color {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    border-radius: 3px;
+    border: 1px solid #d8dde6;
+}
+
+/* Color blocks for each department */
+.legend-color.dept-viz {
+    background-color: #bbdefb;
+}
+
+.legend-color.dept-indirect {
+    background-color: #e8f5e9;
+}
+
+.legend-color.dept-edh {
+    background-color: #e8eaf6;
+}
+
+.legend-color.dept-datacloud {
+    background-color: #e1bee7; /* Purple color for Data Cloud */
+}
+
+.legend-color.dept-snowflake {
+    background-color: #f3e5f5; /* Light purple for Snowflake */
+}
+
+.legend-color.dept-all {
+    background: linear-gradient(135deg, 
+        #bbdefb 20%, /* Viz */
+        #e8f5e9 20%, #e8f5e9 40%, /* Indirect */
+        #e8eaf6 40%, #e8eaf6 60%, /* EDH */
+        #e1bee7 60%, #e1bee7 80%, /* Data Cloud */
+        #f3e5f5 80% /* Snowflake */
+    );
+}
+
+.legend-label {
+    font-size: 13px;
+    flex-grow: 1;
+}
+
+.legend-active {
+    color: #0070d2;
+    font-weight: bold;
+    margin-left: auto;
+}
+
+.org-layout-container {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 16px 0;
+    margin-left: 5px; /* Reduced left margin */
+    position: relative;
+}
+
+.org-chart-section {
+    flex: 1;
+    margin-right: 10px; /* Reduce margin */
+    min-width: 0; /* Fix for flexbox children */
+    max-width: calc(100% - 350px); /* Adjust max width based on detail panel width */
+}
+
+.detail-panel-section {
+    width: 320px;
+    min-width: 320px; /* Ensure minimum width is maintained */
+    border-left: 1px solid #d8dde6;
+    padding-left: 16px; /* Reduce padding */
+    margin-left: 20px; /* Reduce margin between chart and details */
+    background-color: #f8f8f8;
+    border-radius: 8px;
+}
+
+.empty-detail-message {
+    display: flex;
+    height: 200px;
+    align-items: center;
+    justify-content: center;
+    color: #706e6b;
+    font-style: italic;
+}
+
+/* Add to orgChartNextGen.css */
+/* Make all buttons and dropdowns the same height */
+.filter-item lightning-button,
+.filter-item lightning-combobox {
+    display: block;
+    width: 100%;
+}
+
+.filter-item lightning-button button,
+.filter-item lightning-combobox .slds-combobox_container {
+    height: 38px !important; /* Force consistent height */
+    min-height: 38px !important;
+}
+
+.filter-item lightning-button button {
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+/* Primary button styling */
+.filter-item .primary-button button {
+    background-color: #0070d2;
+    color: white;
+    border: 1px solid #0070d2;
+}
+
+/* Badge for pending training count */
+.pending-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e53935;
+    color: white;
+    border-radius: 12px;
+    padding: 0 8px;
+    font-size: 12px;
+    margin-left: 8px;
+    min-width: 20px;
+    height: 20px;
+}
+
+/* Improved filter layout */
+.filters {
+    padding: 0 10px; /* Add padding to the filters container */
+}
+
+.filter-row {
+    display: flex;
+    gap: 10px; /* Add consistent gap between filter elements */
+    margin-bottom: 12px;
+    align-items: center;
+}
+
+.filter-item {
+    flex: 1;
+    min-width: 0; /* Prevent overflow */
+}
+
+/* Add to orgChartNextGen.css */
+.top-container {
+    padding: 16px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.stats-box, .trainings-box {
+    background-color: white;
+    border-radius: 6px;
+    padding: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* More readable stats */
+.stats-box p, .trainings-box p, .trainings-box li {
+    font-size: 14px;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.dept-legend, .trainings-box ul {
+    margin-top: 16px;
+    padding-top: 10px;
+    border-top: 1px solid #d8dde6;
+}
+
+.trainings-box ul {
+    padding-left: 0;
+    list-style: none;
+}
