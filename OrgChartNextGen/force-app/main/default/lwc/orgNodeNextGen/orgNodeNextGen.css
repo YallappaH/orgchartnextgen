@@ -1,0 +1,212 @@
+.dept-datacloud,
+.dept-data\ cloud {
+    background-color: #e1bee7; /* Purple color for Data Cloud */
+}
+
+/* Force remove blue highlight/border - using strongest selectors possible */
+*:focus, *:focus-visible, *:focus-within,
+*[class*="slds-"]:focus,
+*[class*="slds-"]:focus-within,
+.slds-button:focus,
+c-org-node-next-gen *:focus,
+.org-node:focus,
+.node-container:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: #ccc !important;
+}
+
+.node-container:focus, 
+.node-container:focus-within, 
+.node-container:active,
+.org-node:focus, 
+.org-node:active, 
+.org-node:focus-within,
+.org-node.slds-has-focus,
+c-org-node-next-gen:focus-within {
+    outline: none !important;
+    border-color: #ccc !important;
+    box-shadow: none !important;
+}
+
+/* Override specific Salesforce SLDS focus styles */
+.slds-has-focus, 
+.slds-button:focus, 
+.slds-button:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.node-container {
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    position: relative;
+    margin: 0.25rem 0.5rem; /* Reduce margins to prevent spreading too much */
+}
+
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-bottom: 0.25rem;
+    border: 2px solid #f2f2f2;
+}
+
+.node-name {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    max-width: 90px; /* Increase width slightly */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    line-height: 1.2;
+}
+
+/* Horizontal layout for subordinates */
+.horizontal-layout {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 1.5rem; /* Increased margin to ensure lines connect properly */
+    gap: 0.5rem; /* Gap between horizontal nodes */
+    position: relative; /* Ensure this is positioned for connector lines */
+}
+
+/* Vertical layout for subordinates */
+.vertical-layout {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Child node spacing */
+.child-node {
+    margin: 0.25rem;
+}
+
+/* Add to orgNodeNextGen.css */
+.org-node {
+    cursor: pointer;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    min-width: 80px; /* Further reduce width */
+    max-width: 80px; /* Further constrain width */
+    border: none !important; /* Force no border */
+    padding: 0.25rem;
+}
+
+/* Replace the blue highlight with a more subtle indicator */
+.org-node.selected {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+    border-left: 3px solid #0070d2 !important;
+    transform: translateY(-1px);
+}
+
+/* Increase the size slightly for selected nodes */
+.org-node.selected .profile-img {
+    width: 48px;
+    height: 48px;
+}
+
+.org-node.selected .node-name {
+    font-weight: 700;
+    color: #0070d2;
+}
+
+.org-node:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Node styling by employee type */
+.contractor-node {
+    border: 2px dashed #969696 !important;
+}
+
+.manager-node {
+    border: 2px solid #1589ee !important;
+}
+
+/* Department coloring */
+.dept-viz {
+    background-color: #bbdefb; /* Brighter blue for Viz */
+}
+
+.dept-indirect {
+    background-color: #e8f5e9; /* Light green */
+}
+
+.dept-engineering {
+    background-color: #fff3e0; /* Light orange */
+}
+
+.dept-marketing {
+    background-color: #f3e5f5; /* Light purple */
+}
+
+.dept-edh {
+    background-color: #e8eaf6; /* Light indigo */
+}
+
+.dept-snowflake {
+    background-color: #f3e5f5; /* Light purple */
+}
+
+.dept-data {
+    background-color: #e0f2f1; /* Light teal */
+}
+
+.dept-datacloud {
+    background-color: #e1bee7 !important; /* Purple color for Data Cloud with !important */
+}
+
+.dept-default {
+    background-color: #ffffff;
+}
+
+/* Connector lines */
+.node-container {
+    position: relative;
+}
+
+/* Simple vertical connector from parent to children container */
+.vertical-layout::before,
+.horizontal-layout::before {
+    content: '';
+    position: absolute;
+    top: -20px; /* Height of connector */
+    left: 50%;
+    height: 20px;
+    width: 2px; /* Thin line */
+    background-color: #c9c9c9;
+}
+
+/* Simple horizontal connector line above children */
+.horizontal-layout::after {
+    content: '';
+    position: absolute;
+    top: -20px; /* Position at top of connector */
+    left: 0;
+    width: 100%;
+    height: 2px; /* Thin line */
+    background-color: #c9c9c9;
+}
+
+/* Simple vertical lines from horizontal connector to each child */
+.horizontal-layout .child-node::before {
+    content: '';
+    position: absolute;
+    top: -20px; /* Match top position of horizontal connector */
+    left: 50%;
+    height: 20px;
+    width: 2px; /* Thin line */
+    background-color: #c9c9c9;
+}
