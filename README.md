@@ -42,23 +42,23 @@ When an employee node is clicked, the employee's details are shown in a side pan
 The project follows the standard SFDX project structure. The package directory is located at:
 
 ```
-myOrgChartProject/
-└── OrgChartNextGen/force-app/main/default
+OrgChartNextGen/
+└── force-app/main/default
     ├── classes/
     │   └── OrgChartControllerNextGen.cls         // Apex controller to query employee data
     └── lwc/
         ├── orgChartNextGen/
-        │   ├── orgChartNextGen.html               // Main component layout with filters and org chart
-        │   ├── orgChartNextGen.js                 // JavaScript to load data, build tree, compute direct reports, and apply filters
-        │   └── orgChartNextGen.css                // Styles for the org chart layout and filter controls
+        │   ├── orgChartNextGen.html              // Main component layout with filters and org chart
+        │   ├── orgChartNextGen.js                // JavaScript to load data, build tree, compute direct reports, and apply filters
+        │   └── orgChartNextGen.css               // Styles for the org chart layout and filter controls
         ├── orgNodeNextGen/
-        │   ├── orgNodeNextGen.html                // Template for rendering individual org nodes
-        │   ├── orgNodeNextGen.js                  // Logic for collapsible nodes, event handling, and layout (horizontal vs. vertical)
-        │   └── orgNodeNextGen.css                 // Styles for nodes, subordinates layout, and connector lines
+        │   ├── orgNodeNextGen.html               // Template for rendering individual org nodes
+        │   ├── orgNodeNextGen.js                 // Logic for collapsible nodes, event handling, and layout (horizontal vs. vertical)
+        │   └── orgNodeNextGen.css                // Styles for nodes, subordinates layout, and connector lines
         └── employeeDetailNextGen/
-            ├── employeeDetailNextGen.html         // Template for displaying detailed employee information
-            ├── employeeDetailNextGen.js           // Minimal JavaScript exposing the employee attribute
-            └── employeeDetailNextGen.css          // Styles for the detail view (training colors, layout, etc.)
+            ├── employeeDetailNextGen.html        // Template for displaying detailed employee information
+            ├── employeeDetailNextGen.js          // Minimal JavaScript exposing the employee attribute
+            └── employeeDetailNextGen.css         // Styles for the detail view (training colors, layout, etc.)
 ```
 
 The project root also contains the `sfdx-project.json` file which specifies the package directory path.
@@ -68,8 +68,7 @@ The project root also contains the `sfdx-project.json` file which specifies the 
 ### Apex Class
 
 - **OrgChartControllerNextGen.cls**  
-  Retrieves employee data from Salesforce, including fields such as department, email, profile image link, pending training status, and pending courses details. Includes error handling and fallback to sample data when the actual data source is unavailable.  
-  **Path:** `OrgChartNextGen/force-app/main/default/classes/OrgChartControllerNextGen.cls`
+  Retrieves employee data from Salesforce, including fields such as department, email, profile image link, pending training status, and pending courses details. Includes error handling and fallback to sample data when the actual data source is unavailable.
 
 ### Lightning Web Components
 
@@ -78,53 +77,44 @@ The project root also contains the `sfdx-project.json` file which specifies the 
 This is the main component that displays the interactive org chart and filtering controls.
 
 - **orgChartNextGen.html**  
-  Contains the markup for the interactive department legend, filter controls (Hide Contractors, Pending Training with count, and Training Course dropdown) and renders the org chart on the left along with a detail panel on the right.  
-  **Path:** `OrgChartNextGen/force-app/main/default/lwc/orgChartNextGen/orgChartNextGen.html`
+  Contains the markup for the interactive department legend, filter controls (Hide Contractors, Pending Training with count, and Training Course dropdown) and renders the org chart on the left along with a detail panel on the right.
   
 - **orgChartNextGen.js**  
-  Loads employee data via Apex, builds the full organization tree while preserving the original order, computes direct report counts, and applies filters based on the user's selections. Includes methods for handling interactive department legend clicks.  
-  **Path:** `OrgChartNextGen/force-app/main/default/lwc/orgChartNextGen/orgChartNextGen.js`
+  Loads employee data via Apex, builds the full organization tree while preserving the original order, computes direct report counts, and applies filters based on the user's selections. Includes methods for handling interactive department legend clicks.
   
 - **orgChartNextGen.css**  
-  Provides styling for layout, ensuring horizontal scrolling for the org chart, proper spacing of filter controls, styling for the detail panel, and the interactive department color legend.  
-  **Path:** `OrgChartNextGen/force-app/main/default/lwc/orgChartNextGen/orgChartNextGen.css`
+  Provides styling for layout, ensuring horizontal scrolling for the org chart, proper spacing of filter controls, styling for the detail panel, and the interactive department color legend.
 
 #### orgNodeNextGen
 
 This component renders an individual node (employee) of the org chart. It supports collapsible subtrees and different layouts for subordinates (horizontal for the top layers and vertical for deeper layers or for specific employees).
 
 - **orgNodeNextGen.html**  
-  Template for displaying the node content (profile image and employee name) and its subordinates.  
-  **Path:** `OrgChartNextGen/force-app/main/default/lwc/orgNodeNextGen/orgNodeNextGen.html`
+  Template for displaying the node content (profile image and employee name) and its subordinates.
   
 - **orgNodeNextGen.js**  
-  Contains the logic for handling node clicks (to select an employee), toggling collapse/expand of subordinates, and determining if the subordinates should be displayed horizontally or vertically. Includes methods for handling selection styling.  
-  **Path:** `OrgChartNextGen/force-app/main/default/lwc/orgNodeNextGen/orgNodeNextGen.js`
+  Contains the logic for handling node clicks (to select an employee), toggling collapse/expand of subordinates, and determining if the subordinates should be displayed horizontally or vertically. Includes methods for handling selection styling.
   
 - **orgNodeNextGen.css**  
-  Styles individual nodes, the layout for horizontal and vertical subordinate presentation, connector lines between nodes, and department-specific colors.  
-  **Path:** `OrgChartNextGen/force-app/main/default/lwc/orgNodeNextGen/orgNodeNextGen.css`
+  Styles individual nodes, the layout for horizontal and vertical subordinate presentation, connector lines between nodes, and department-specific colors.
 
 #### employeeDetailNextGen
 
 This component shows detailed information about a selected employee.
 
 - **employeeDetailNextGen.html**  
-  Contains the markup for the detail view, including profile image, name, title, department, email, direct reports count, and a list of pending training courses (with due dates, color coding, and emojis).  
-  **Path:** `OrgChartNextGen/force-app/main/default/lwc/employeeDetailNextGen/employeeDetailNextGen.html`
+  Contains the markup for the detail view, including profile image, name, title, department, email, direct reports count, and a list of pending training courses (with due dates, color coding, and emojis).
   
 - **employeeDetailNextGen.js**  
-  JavaScript that exposes the employee attribute to the template and calculates training statistics.  
-  **Path:** `OrgChartNextGen/force-app/main/default/lwc/employeeDetailNextGen/employeeDetailNextGen.js`
+  JavaScript that exposes the employee attribute to the template and calculates training statistics.
   
 - **employeeDetailNextGen.css**  
-  Provides styles for the detail view, including color definitions for training status (red, yellow, grey, green), styling for the "None" message, and optional department background colors. Includes visual indicators for training status.  
-  **Path:** `OrgChartNextGen/force-app/main/default/lwc/employeeDetailNextGen/employeeDetailNextGen.css`
+  Provides styles for the detail view, including color definitions for training status (red, yellow, grey, green), styling for the "None" message, and optional department background colors. Includes visual indicators for training status.
 
 ## Deployment Instructions
 
 1. **Verify `sfdx-project.json`**  
-   Confirm that the `packageDirectories` property in your `sfdx-project.json` file points to `"OrgChartNextGen"`, like this:
+   Confirm that the `packageDirectories` property in your `sfdx-project.json` file points to `"OrgChartNextGen"`:
    ```json
    {
        "packageDirectories": [
@@ -140,10 +130,15 @@ This component shows detailed information about a selected employee.
    ```
 
 2. **Deploy to Your Salesforce Org**  
-   Open your terminal (or command prompt) in the project root directory and run:
+   Open your terminal (or command prompt) and run:
 
    ```
-   sfdx force:source:deploy -p OrgChartNextGen -u i360Dev
+   sfdx force:source:deploy -p OrgChartNextGen -u YourOrgAlias
+   ```
+
+   Or with the newer CLI format:
+   ```
+   sf project deploy start --source-dir OrgChartNextGen --target-org YourOrgAlias
    ```
 
    This command will deploy all the metadata (Apex class and LWC components) to your Salesforce org.
@@ -184,16 +179,13 @@ This component shows detailed information about a selected employee.
 - **Styling Adjustments:**  
   The provided CSS can be adjusted in the respective files to further refine the look and feel of the org chart and detail panel.
 
-- **Component Warnings:**  
-  Warnings like "ComponentProfiler: Component-level profiling has not been enabled" or deprecated meta tag warnings can be safely ignored—they do not affect functionality.
-
 ## Recent Updates
 
 - **Interactive Department Filtering:** Replaced the department dropdown with an interactive color legend for more intuitive filtering
-- **Enhanced Department Colors:** Updated the Viz department color to a brighter blue for better visibility
+- **Enhanced Department Colors:** Updated the department colors for better visibility
 - **Visual Indicators:** Added clear visual indicators for the active department filter
 - **Improved Connector Lines:** Enhanced the connector lines between manager and direct reports
 - **Fallback Data Source:** Added robust error handling with sample data when the actual data source is unavailable
 - **Style Enhancements:** Improved the overall styling and layout of the application
 - **Fixed Object Immutability Issues:** Resolved issues with object extensibility in the JavaScript
-- **Additional Department Support:** Added support for new departments (EDH, Data) with appropriate color coding
+- **Additional Department Support:** Added support for new departments (EDH, Data Cloud) with appropriate color coding
