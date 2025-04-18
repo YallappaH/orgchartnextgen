@@ -1,0 +1,41 @@
+<template>
+    <div class="node-container">
+        <!-- Node box with custom style -->
+        <div class="org-node" style="outline: none !important; box-shadow: none !important; border: none !important;" onclick={handleNodeClick}>
+            <img src={treeItem.profileImageLink} alt="Profile" class="profile-img" />
+            <span class="node-name">{treeItem.fullName}</span>
+        </div>
+        
+        <!-- Subordinate container if any -->
+        <template if:true={hasSubordinates}>
+            <template if:true={isVerticalLayout}>
+                <!-- Vertical Layout -->
+                <ul class="subordinates vertical-layout">
+                    <template for:each={treeItem.subordinates} for:item="child">
+                        <li key={child.email} class="child-node">
+                            <c-org-node-next-gen 
+                                tree-item={child}
+                                depth={computedChildDepth}
+                                onemployeeclick={handleChildClick}>
+                            </c-org-node-next-gen>
+                        </li>
+                    </template>
+                </ul>
+            </template>
+            <template if:false={isVerticalLayout}>
+                <!-- Horizontal Layout -->
+                <div class="subordinates horizontal-layout">
+                    <template for:each={treeItem.subordinates} for:item="child">
+                        <div key={child.email} class="child-node">
+                            <c-org-node-next-gen
+                                tree-item={child}
+                                depth={computedChildDepth}
+                                onemployeeclick={handleChildClick}>
+                            </c-org-node-next-gen>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </template>
+    </div>
+</template>
