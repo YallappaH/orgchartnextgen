@@ -1,0 +1,156 @@
+/* Training alerts with warning triangle and other icons */
+
+.training-red {
+    background-color: #ffebee;
+    color: #c62828;
+    font-weight: 500;
+    padding: 8px;
+    position: relative;
+    margin-bottom: 6px;
+    border-radius: 4px;
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.training-red .warning-icon::before {
+    content: "⚠️";
+    margin-left: 8px;
+}
+
+.training-yellow {
+    background-color: #fff8e1;
+    color: #f57f17;
+    font-weight: 500;
+    padding: 8px;
+    position: relative;
+    margin-bottom: 6px;
+    border-radius: 4px;
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.training-yellow .warning-icon::before {
+    content: "⚠️";
+    margin-left: 8px;
+}
+
+.training-grey {
+    background-color: #f5f5f5;
+    color: #616161;
+    font-weight: 500;
+    padding: 8px;
+    position: relative;
+    margin-bottom: 6px;
+    border-radius: 4px;
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.training-grey .warning-icon::before {
+    content: "⚠️";
+    margin-left: 8px;
+}
+
+.no-training {
+    color: green;
+    font-style: italic;
+}
+
+/* Department background colors (adjust as needed) */
+.dept-viz {
+    background-color: #e0f7fa;
+}
+.dept-indirect {
+    background-color: #f1f8e9;
+}
+.dept-default {
+    background-color: #ffffff;
+}
+
+/* New styles for direct reports training stats */
+.direct-report-stats {
+    border-top: 1px solid #ddd;
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
+}
+.direct-report-stats p {
+    margin: 0.25rem 0;
+}
+.direct-report-stats ul {
+    margin: 0;
+    padding-left: 1rem;
+}
+
+.profile-img {
+    width: 80px;          /* Adjust to your preferred size */
+    height: 80px;         /* Same as width for a square image */
+    border-radius: 50%;   /* Keep circular shape */
+    margin-bottom: 0.25rem;
+}
+
+/* Add to employeeDetailNextGen.css */
+.employee-detail {
+    padding: 16px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    max-width: 320px; /* Limit width to prevent overflow */
+}
+
+.profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 16px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block; /* Center the image */
+    border: 3px solid #f2f2f2;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.employee-detail h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #16325c;
+}
+
+.employee-detail p {
+    font-size: 14px;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.section-heading {
+    font-size: 16px;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #d8dde6;
+}
+
+/* Training status indicators */
+.training-section ul {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.training-section li {
+    padding: 8px;
+    margin-bottom: 6px;
+    border-radius: 4px;
+}
+
+.stats {
+    background-color: #f8f8f8;
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 16px;
+}
